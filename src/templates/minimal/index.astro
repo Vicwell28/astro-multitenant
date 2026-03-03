@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "./components/Header.astro";
+import Hero from "./components/Hero.astro";
+import Footer from "./components/Footer.astro";
+import type { TenantConfig } from "../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+  slug?: string[];
+}
+
+const { tenant } = Astro.props;
+---
+
+<BaseLayout tenant={tenant}>
+  <Header tenant={tenant} />
+  <Hero tenant={tenant} />
+
+  <section id="trabajo" class="py-24 px-8 max-w-5xl mx-auto">
+    <h2 class="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-12">Trabajo selecto</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-100">
+      {[1, 2, 3, 4].map((i) => (
+        <div class="bg-white p-12 hover:bg-gray-50 transition-colors cursor-pointer">
+          <p class="text-4xl font-black text-gray-200 mb-4">0{i}</p>
+          <h3 class="text-lg font-medium text-gray-900">Proyecto {i}</h3>
+          <p class="text-sm text-gray-400 mt-1">Descripción breve del proyecto.</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Footer tenant={tenant} />
+</BaseLayout>

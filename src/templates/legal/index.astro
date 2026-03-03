@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "./components/Header.astro";
+import Hero from "./components/Hero.astro";
+import PracticeAreas from "./components/PracticeAreas.astro";
+import TeamSection from "./components/TeamSection.astro";
+import Testimonials from "./components/Testimonials.astro";
+import Footer from "./components/Footer.astro";
+import type { TenantConfig } from "../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+  slug?: string[];
+}
+
+const { tenant } = Astro.props;
+const about = tenant.content.about;
+---
+
+<BaseLayout tenant={tenant}>
+  <Header tenant={tenant} />
+  <Hero tenant={tenant} />
+
+  {about && (
+    <section class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="w-12 h-0.5 bg-yellow-400 mb-6" />
+        <h2 class="font-serif text-4xl font-bold text-gray-900 mb-6">{about.title}</h2>
+        <p class="text-gray-600 leading-relaxed text-lg">{about.description}</p>
+      </div>
+    </section>
+  )}
+
+  <PracticeAreas tenant={tenant} />
+  <TeamSection tenant={tenant} />
+  <Testimonials tenant={tenant} />
+  <Footer tenant={tenant} />
+</BaseLayout>

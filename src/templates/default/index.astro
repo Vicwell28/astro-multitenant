@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "./components/Header.astro";
+import Hero from "./components/Hero.astro";
+import Footer from "./components/Footer.astro";
+import type { TenantConfig } from "../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+  slug?: string[];
+}
+
+const { tenant } = Astro.props;
+const services = tenant.content.services ?? [];
+---
+
+<BaseLayout tenant={tenant}>
+  <Header tenant={tenant} />
+  <Hero tenant={tenant} />
+
+  {services.length > 0 && (
+    <section id="servicios" class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Nuestros Servicios</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              {service.icon && <div class="text-4xl mb-4">{service.icon}</div>}
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+              {service.description && (
+                <p class="text-gray-600 leading-relaxed">{service.description}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Footer tenant={tenant} />
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+---
+
+<header class="sticky top-0 z-50 border-b border-purple-100 bg-white/95 backdrop-blur-sm shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      {tenant.logo
+        ? <img src={tenant.logo} alt={tenant.name} class="h-10 w-auto" />
+        : <span class="text-2xl font-black tracking-tight" style={`color: ${tenant.primaryColor}`}>{tenant.name}</span>
+      }
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#about" class="text-gray-500 hover:text-gray-800 text-sm font-medium">Nosotros</a>
+      <a href="#servicios" class="text-gray-500 hover:text-gray-800 text-sm font-medium">Servicios</a>
+      <a
+        href="#contacto"
+        class="px-5 py-2.5 rounded-lg text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all"
+        style={`background: linear-gradient(135deg, ${tenant.primaryColor}, ${tenant.secondaryColor})`}
+      >
+        Comenzar
+      </a>
+    </nav>
+  </div>
+</header>

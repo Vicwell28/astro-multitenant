@@ -1,0 +1,49 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+const hero = tenant.content.hero ?? {};
+---
+
+<section
+  class="relative min-h-[75vh] flex items-center text-white overflow-hidden"
+  style={`background-color: ${tenant.primaryColor}`}
+>
+  <!-- Decorative pattern -->
+  <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%); background-size: 20px 20px;" />
+
+  <div class="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 items-center gap-12">
+    <div>
+      <!-- Golden decorative line -->
+      <div class="w-16 h-1 bg-yellow-400 mb-8 rounded" />
+      <h1 class="font-serif text-5xl font-bold leading-tight mb-6">
+        {hero.title ?? tenant.name}
+      </h1>
+      {hero.subtitle && (
+        <p class="text-lg opacity-85 leading-relaxed mb-10">{hero.subtitle}</p>
+      )}
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="#areas"
+          class="px-8 py-3.5 bg-yellow-400 text-gray-900 font-bold rounded hover:bg-yellow-300 transition-colors"
+        >
+          Nuestras Áreas
+        </a>
+        <a
+          href="#contacto"
+          class="px-8 py-3.5 border-2 border-white/50 text-white font-semibold rounded hover:border-white transition-colors"
+        >
+          Consulta Gratuita
+        </a>
+      </div>
+    </div>
+    <div class="hidden md:flex justify-center">
+      <div class="w-64 h-64 rounded-full border-4 border-yellow-400/30 flex items-center justify-center">
+        <span class="text-8xl">⚖️</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+const footer = tenant.content.footer ?? {};
+---
+
+<footer id="contacto" class="text-gray-300 py-16" style={`background-color: #0f1923`}>
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+      <!-- Firma -->
+      <div>
+        <h3 class="font-serif text-white font-bold text-lg mb-4">{tenant.name}</h3>
+        {footer.address && <p class="text-sm leading-relaxed">{footer.address}</p>}
+      </div>
+      <!-- Horario -->
+      <div>
+        <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Horario de Atención</h4>
+        {footer.schedule && <p class="text-sm leading-relaxed">{footer.schedule}</p>}
+      </div>
+      <!-- Legal -->
+      <div>
+        <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Legal</h4>
+        {footer.legal && <p class="text-sm">{footer.legal}</p>}
+      </div>
+    </div>
+    <div class="pt-8 border-t border-gray-700 text-center text-xs">
+      {footer.text ?? `© 2026 ${tenant.name}`}
+    </div>
+  </div>
+</footer>

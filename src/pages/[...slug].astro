@@ -1,0 +1,35 @@
+---
+import type { TenantConfig } from "../lib/types.ts";
+import DefaultTemplate from "../templates/default/index.astro";
+import PremiumTemplate from "../templates/premium/index.astro";
+import MinimalTemplate from "../templates/minimal/index.astro";
+import LegalTemplate from "../templates/legal/index.astro";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const tenant = Astro.locals.tenant;
+
+if (!tenant) {
+  return Astro.redirect("/404");
+}
+
+const TEMPLATE_MAP = {
+  default: DefaultTemplate,
+  premium: PremiumTemplate,
+  minimal: MinimalTemplate,
+  legal: LegalTemplate,
+} as const;
+
+type TemplateId = keyof typeof TEMPLATE_MAP;
+
+const Template = TEMPLATE_MAP[tenant.templateId as TemplateId];
+
+if (!Template) {
+  return new Response(`Template "${tenant.templateId}" not found`, { status: 500 });
+}
+
+const slugParts = slug ? slug.split("/").filter(Boolean) : [];
+---
+
+<Template tenant={tenant} slug={slugParts} />

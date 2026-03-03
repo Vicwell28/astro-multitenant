@@ -1,0 +1,18 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+---
+
+<header class="py-6 px-8 flex items-center justify-between border-b border-gray-100">
+  <a href="/" class="text-lg font-medium tracking-tight text-gray-900">
+    {tenant.name}
+  </a>
+  <nav class="flex items-center gap-6">
+    <a href="#trabajo" class="text-sm text-gray-400 hover:text-gray-900 transition-colors">Trabajo</a>
+    <a href="#contacto" class="text-sm text-gray-400 hover:text-gray-900 transition-colors">Contacto</a>
+  </nav>
+</header>

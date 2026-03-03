@@ -1,0 +1,32 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+const hero = tenant.content.hero ?? {};
+---
+
+<section
+  class="relative min-h-[70vh] flex items-center justify-center text-white text-center px-6"
+  style={`background: linear-gradient(135deg, ${tenant.primaryColor} 0%, ${tenant.secondaryColor} 100%)`}
+>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-5xl font-extrabold mb-6 leading-tight drop-shadow-sm">
+      {hero.title ?? tenant.name}
+    </h1>
+    {hero.subtitle && (
+      <p class="text-xl mb-8 opacity-90">{hero.subtitle}</p>
+    )}
+    {hero.cta && (
+      <a
+        href="#contacto"
+        class="inline-block px-8 py-4 bg-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all"
+        style={`color: ${tenant.primaryColor}`}
+      >
+        {hero.cta}
+      </a>
+    )}
+  </div>
+</section>
