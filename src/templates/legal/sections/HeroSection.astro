@@ -1,0 +1,67 @@
+---
+import type { HeroContent, Tenant } from "../../../lib/types.ts";
+
+interface Props {
+  content: HeroContent;
+  tenant: Tenant;
+}
+
+const { content, tenant } = Astro.props;
+const { heading, subheading, ctaText, ctaUrl, ctaSecondaryText, ctaSecondaryUrl } = content;
+const { theme } = tenant;
+---
+
+<section
+  class="relative flex min-h-[75vh] items-center justify-center overflow-hidden"
+  style={`background: ${theme.primaryColor};`}
+>
+  <!-- Subtle pattern overlay -->
+  <div
+    class="absolute inset-0 opacity-5"
+    style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%); background-size: 20px 20px;"
+  ></div>
+  <!-- Gold accent line at top -->
+  <div class="absolute top-0 left-0 right-0 h-1" style={`background: ${theme.accentColor};`}></div>
+
+  <div class="relative z-10 mx-auto max-w-4xl px-6 py-28 text-center">
+    <!-- Decorative gold divider -->
+    <div class="mx-auto mb-8 flex items-center justify-center gap-4">
+      <div class="h-px w-16" style={`background: ${theme.accentColor};`}></div>
+      <span class="text-2xl" style={`color: ${theme.accentColor};`}>⚖</span>
+      <div class="h-px w-16" style={`background: ${theme.accentColor};`}></div>
+    </div>
+
+    <h1
+      class="mb-6 text-4xl font-bold leading-snug text-white md:text-5xl"
+      style="font-family: var(--font-heading, 'Playfair Display', serif);"
+    >
+      {heading}
+    </h1>
+    {subheading && (
+      <p class="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-blue-200">
+        {subheading}
+      </p>
+    )}
+
+    <div class="flex flex-wrap justify-center gap-5">
+      {ctaText && ctaUrl && (
+        <a
+          href={ctaUrl}
+          class="rounded px-10 py-4 text-lg font-bold transition-all hover:opacity-90"
+          style={`background: ${theme.accentColor}; color: #1a1a1a;`}
+        >
+          {ctaText}
+        </a>
+      )}
+      {ctaSecondaryText && ctaSecondaryUrl && (
+        <a
+          href={ctaSecondaryUrl}
+          class="rounded border-2 px-10 py-4 text-lg font-semibold text-white transition-all hover:bg-white hover:text-blue-900"
+          style={`border-color: ${theme.accentColor};`}
+        >
+          {ctaSecondaryText}
+        </a>
+      )}
+    </div>
+  </div>
+</section>

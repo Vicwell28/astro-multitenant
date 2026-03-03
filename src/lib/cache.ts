@@ -1,12 +1,7 @@
-import type { TenantConfig } from "./types.ts";
-
-interface CacheEntry<T> {
-  value: T;
-  expiresAt: number;
-}
+import type { Tenant } from "./types.ts";
 
 export class MemoryCache<T> {
-  private store = new Map<string, CacheEntry<T>>();
+  private store = new Map<string, { value: T; expiresAt: number }>();
   private ttl: number;
 
   constructor(ttlSeconds = 300) {
@@ -36,4 +31,4 @@ export class MemoryCache<T> {
   }
 }
 
-export const tenantCache = new MemoryCache<TenantConfig>(300);
+export const tenantCache = new MemoryCache<Tenant>(300);

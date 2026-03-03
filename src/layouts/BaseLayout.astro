@@ -1,13 +1,15 @@
 ---
 import "../styles/global.css";
-import type { TenantConfig } from "../lib/types.ts";
+import type { Tenant, Page } from "../lib/types.ts";
 
 interface Props {
-  tenant: TenantConfig;
+  tenant: Tenant;
+  page?: Page | null;
 }
 
-const { tenant } = Astro.props;
-const { metadata, name, primaryColor, secondaryColor, customCss, logo } = tenant;
+const { tenant, page } = Astro.props;
+const { theme, name, logo, favicon } = tenant;
+const metadata = page?.metadata ?? tenant.metadata;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.url).toString();
 const ogImage = metadata.ogImage ?? "/og-default.png";
@@ -28,11 +30,12 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO básico -->
+    <!-- SEO -->
     <title>{metadata.title}</title>
     <meta name="description" content={metadata.description} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
+    {tenant.metadata.keywords && <meta name="keywords" content={tenant.metadata.keywords.join(", ")} />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -49,22 +52,32 @@ const jsonLd = {
     <meta name="twitter:description" content={metadata.description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- JSON-LD -->
+    <!-- JSON-LD Organization Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-    <!-- Favicon dinámico -->
-    {logo && <link rel="icon" href={logo} />}
-    {!logo && <link rel="icon" href="/favicon.svg" />}
+    <!-- Favicon -->
+    {favicon && <link rel="icon" href={favicon} />}
+    {!favicon && logo && <link rel="icon" href={logo} />}
+    {!favicon && !logo && <link rel="icon" href="/favicon.svg" />}
 
     <!-- Preconnect fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Custom CSS dinámico del tenant -->
-    {customCss && <style set:html={customCss} />}
+    <!-- Custom CSS from tenant theme -->
+    {theme.customCss && <style set:html={theme.customCss} />}
 
-    <!-- CSS variables del tenant -->
-    <style set:html={`:root { --color-primary: ${primaryColor}; --color-secondary: ${secondaryColor}; }`} />
+    <!-- CSS variables -->
+    <style set:html={`
+      :root {
+        --color-primary: ${theme.primaryColor};
+        --color-secondary: ${theme.secondaryColor};
+        --color-accent: ${theme.accentColor};
+        --font-heading: ${theme.fontHeading ?? "Inter, sans-serif"};
+        --font-body: ${theme.fontBody ?? "Inter, sans-serif"};
+        --border-radius: ${theme.borderRadius ?? "0.5rem"};
+      }
+    `} />
   </head>
   <body>
     <slot />

@@ -1,9 +1,10 @@
 /// <reference types="astro/client" />
 
-import type { TenantConfig } from "./lib/types.ts";
+import type { Tenant, Page } from "./lib/types.ts";
 
 declare namespace App {
   interface Locals {
-    tenant: TenantConfig | null;
+    tenant: Tenant | null;
+    page: Page | null;
   }
 }

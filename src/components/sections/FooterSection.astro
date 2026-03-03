@@ -1,0 +1,44 @@
+---
+import type { FooterContent, Tenant } from "../../lib/types.ts";
+
+interface Props {
+  content: FooterContent;
+  tenant: Tenant;
+}
+
+const { content, tenant } = Astro.props;
+const { text, columns, socialLinks } = content;
+---
+
+<footer class="bg-gray-900 text-gray-300">
+  <div class="mx-auto max-w-6xl px-6 py-14">
+    {columns && columns.length > 0 && (
+      <div class="mb-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {columns.map((col) => (
+          <div>
+            <h4 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">{col.title}</h4>
+            <ul class="space-y-2">
+              {col.links.map((link) => (
+                <li>
+                  <a href={link.url} class="text-sm hover:text-white transition-colors">{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    )}
+    <div class="border-t border-gray-800 pt-8">
+      <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <p class="text-sm">{text}</p>
+        {socialLinks && socialLinks.length > 0 && (
+          <div class="flex gap-4">
+            {socialLinks.map((s) => (
+              <a href={s.url} class="text-sm hover:text-white transition-colors">{s.platform}</a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</footer>

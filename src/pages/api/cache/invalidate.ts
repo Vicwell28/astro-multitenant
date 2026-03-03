@@ -1,22 +1,9 @@
 import type { APIRoute } from "astro";
-import { invalidateTenantCache } from "../../../lib/tenant.ts";
+import { invalidateTenantCache } from "../../../lib/data-store.ts";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  const adminApiKey = import.meta.env.ADMIN_API_KEY;
-
-  // Validate Bearer token
-  const authHeader = request.headers.get("Authorization") ?? "";
-  const token = authHeader.replace("Bearer ", "").trim();
-
-  if (!adminApiKey || token !== adminApiKey) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
   let body: { subdomain?: string } = {};
   try {
     body = await request.json();
@@ -34,8 +21,8 @@ export const POST: APIRoute = async ({ request }) => {
     JSON.stringify({
       ok: true,
       message: subdomain
-        ? `Cache invalidated for "${subdomain}"`
-        : "All tenant cache invalidated",
+        ? `Cache invalidado para "${subdomain}"`
+        : "Todo el caché invalidado",
     }),
     {
       status: 200,

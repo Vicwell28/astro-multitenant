@@ -1,0 +1,48 @@
+---
+import type { PricingContent, Tenant } from "../../lib/types.ts";
+
+interface Props {
+  content: PricingContent;
+  tenant: Tenant;
+}
+
+const { content, tenant } = Astro.props;
+const { heading, subtitle, plans } = content;
+const { theme } = tenant;
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mb-14 text-center">
+      <h2 class="mb-4 text-4xl font-bold text-gray-900">{heading}</h2>
+      {subtitle && <p class="text-lg text-gray-600">{subtitle}</p>}
+    </div>
+    <div class="grid gap-8 md:grid-cols-3">
+      {plans.map((plan) => (
+        <div class={`rounded-2xl p-8 ${plan.highlighted ? "shadow-2xl ring-2 text-white" : "bg-white shadow-sm"}`}
+          style={plan.highlighted ? `background: ${theme.primaryColor}; ring-color: ${theme.accentColor};` : ""}>
+          <h3 class="mb-2 text-2xl font-bold">{plan.name}</h3>
+          <div class="mb-6">
+            <span class="text-4xl font-bold">{plan.price}</span>
+            {plan.period && <span class="ml-1 text-sm opacity-75">/{plan.period}</span>}
+          </div>
+          <ul class="mb-8 space-y-3">
+            {plan.features.map((feat) => (
+              <li class="flex items-center gap-2">
+                <span class="text-green-400">✓</span>
+                <span class={plan.highlighted ? "text-white opacity-90" : "text-gray-600"}>{feat}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={plan.ctaUrl}
+            class="block rounded-lg py-3 text-center font-semibold transition-all"
+            style={plan.highlighted ? `background: ${theme.accentColor}; color: #fff;` : `background: ${theme.primaryColor}; color: #fff;`}
+          >
+            {plan.ctaText}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

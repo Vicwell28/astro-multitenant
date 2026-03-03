@@ -1,0 +1,70 @@
+---
+import type { ContactFormContent, Tenant } from "../../lib/types.ts";
+
+interface Props {
+  content: ContactFormContent;
+  tenant: Tenant;
+}
+
+const { content } = Astro.props;
+const { heading, subtitle, email, phone, address } = content;
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="mx-auto max-w-4xl px-6">
+    <div class="mb-12 text-center">
+      <h2 class="mb-4 text-4xl font-bold text-gray-900">{heading}</h2>
+      {subtitle && <p class="text-lg text-gray-600">{subtitle}</p>}
+    </div>
+    <div class="grid gap-12 md:grid-cols-2">
+      <div>
+        <form class="space-y-6">
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Nombre</label>
+            <input type="text" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tu nombre completo" />
+          </div>
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Correo electrónico</label>
+            <input type="email" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="tu@email.com" />
+          </div>
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Mensaje</label>
+            <textarea rows="4" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="¿En qué podemos ayudarte?"></textarea>
+          </div>
+          <button type="submit" class="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700 transition-colors">
+            Enviar mensaje
+          </button>
+        </form>
+      </div>
+      <div class="space-y-6">
+        {email && (
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">✉️</span>
+            <div>
+              <p class="font-semibold text-gray-900">Correo electrónico</p>
+              <a href={`mailto:${email}`} class="text-blue-600 hover:underline">{email}</a>
+            </div>
+          </div>
+        )}
+        {phone && (
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">📞</span>
+            <div>
+              <p class="font-semibold text-gray-900">Teléfono</p>
+              <a href={`tel:${phone}`} class="text-blue-600 hover:underline">{phone}</a>
+            </div>
+          </div>
+        )}
+        {address && (
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">📍</span>
+            <div>
+              <p class="font-semibold text-gray-900">Dirección</p>
+              <p class="text-gray-600">{address}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

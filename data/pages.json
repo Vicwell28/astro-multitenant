@@ -1,0 +1,927 @@
+[
+  {
+    "id": "page-1",
+    "tenantId": "tenant-1",
+    "templateId": "default",
+    "slug": "",
+    "title": "Inicio",
+    "isPublished": true,
+    "sections": [
+      {
+        "id": "sec-1-1",
+        "type": "hero",
+        "order": 1,
+        "visible": true,
+        "content": {
+          "heading": "Transformamos tu Negocio con Tecnología",
+          "subheading": "Soluciones innovadoras en consultoría, desarrollo de software y transformación digital para impulsar tu empresa al siguiente nivel.",
+          "ctaText": "Solicita una Consulta",
+          "ctaUrl": "#contacto",
+          "ctaSecondaryText": "Ver Servicios",
+          "ctaSecondaryUrl": "#servicios",
+          "backgroundImage": "",
+          "overlayOpacity": 0.5
+        }
+      },
+      {
+        "id": "sec-1-2",
+        "type": "services",
+        "order": 2,
+        "visible": true,
+        "content": {
+          "heading": "Nuestros Servicios",
+          "subtitle": "Todo lo que necesitas para crecer en el mundo digital",
+          "items": [
+            {
+              "id": "svc-1",
+              "icon": "💼",
+              "title": "Consultoría Estratégica",
+              "description": "Analizamos tu empresa y diseñamos estrategias personalizadas para maximizar tu rentabilidad y crecimiento sostenible."
+            },
+            {
+              "id": "svc-2",
+              "icon": "💻",
+              "title": "Desarrollo de Software",
+              "description": "Creamos aplicaciones web y móviles a la medida, utilizando las últimas tecnologías y metodologías ágiles."
+            },
+            {
+              "id": "svc-3",
+              "icon": "☁️",
+              "title": "Infraestructura Cloud",
+              "description": "Migramos y optimizamos tu infraestructura en la nube para reducir costos y mejorar la disponibilidad."
+            },
+            {
+              "id": "svc-4",
+              "icon": "📊",
+              "title": "Análisis de Datos",
+              "description": "Transformamos tus datos en insights accionables con dashboards intuitivos y reportes en tiempo real."
+            },
+            {
+              "id": "svc-5",
+              "icon": "🔐",
+              "title": "Ciberseguridad",
+              "description": "Protegemos tu información y sistemas críticos contra amenazas con auditorías y soluciones de seguridad."
+            },
+            {
+              "id": "svc-6",
+              "icon": "🚀",
+              "title": "Marketing Digital",
+              "description": "Estrategias de marketing digital que posicionan tu marca y generan leads calificados de manera consistente."
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-1-3",
+        "type": "stats",
+        "order": 3,
+        "visible": true,
+        "content": {
+          "heading": "Nuestros Resultados Hablan",
+          "items": [
+            {
+              "id": "stat-1",
+              "value": "150+",
+              "label": "Proyectos Completados",
+              "icon": "✅"
+            },
+            {
+              "id": "stat-2",
+              "value": "98%",
+              "label": "Clientes Satisfechos",
+              "icon": "⭐"
+            },
+            {
+              "id": "stat-3",
+              "value": "10+",
+              "label": "Años de Experiencia",
+              "icon": "📅"
+            },
+            {
+              "id": "stat-4",
+              "value": "50+",
+              "label": "Profesionales en Equipo",
+              "icon": "👥"
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-1-4",
+        "type": "cta-banner",
+        "order": 4,
+        "visible": true,
+        "content": {
+          "heading": "¿Listo para transformar tu empresa?",
+          "description": "Agenda una consulta gratuita con nuestros expertos y descubre cómo podemos ayudarte a alcanzar tus objetivos.",
+          "ctaText": "Agenda tu Consulta Gratis",
+          "ctaUrl": "#contacto",
+          "backgroundColor": "#3B82F6"
+        }
+      },
+      {
+        "id": "sec-1-5",
+        "type": "footer",
+        "order": 5,
+        "visible": true,
+        "content": {
+          "text": "© 2026 Cliente Uno S.A. de C.V. Todos los derechos reservados.",
+          "columns": [
+            {
+              "title": "Servicios",
+              "links": [
+                {
+                  "label": "Consultoría",
+                  "url": "#"
+                },
+                {
+                  "label": "Desarrollo",
+                  "url": "#"
+                },
+                {
+                  "label": "Cloud",
+                  "url": "#"
+                },
+                {
+                  "label": "Datos",
+                  "url": "#"
+                }
+              ]
+            },
+            {
+              "title": "Empresa",
+              "links": [
+                {
+                  "label": "Sobre Nosotros",
+                  "url": "#"
+                },
+                {
+                  "label": "Equipo",
+                  "url": "#"
+                },
+                {
+                  "label": "Blog",
+                  "url": "#"
+                },
+                {
+                  "label": "Contacto",
+                  "url": "#"
+                }
+              ]
+            },
+            {
+              "title": "Legal",
+              "links": [
+                {
+                  "label": "Privacidad",
+                  "url": "#"
+                },
+                {
+                  "label": "Términos de Uso",
+                  "url": "#"
+                },
+                {
+                  "label": "Cookies",
+                  "url": "#"
+                }
+              ]
+            }
+          ],
+          "socialLinks": [
+            {
+              "platform": "LinkedIn",
+              "url": "#"
+            },
+            {
+              "platform": "Twitter",
+              "url": "#"
+            },
+            {
+              "platform": "Facebook",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "metadata": {
+      "title": "Inicio | Cliente Uno - Soluciones Innovadoras",
+      "description": "Bienvenido a Cliente Uno. Ofrecemos consultoría, desarrollo de software y transformación digital."
+    },
+    "createdAt": "2024-01-15T10:00:00Z",
+    "updatedAt": "2026-03-03T04:07:35.118Z"
+  },
+  {
+    "id": "page-2",
+    "tenantId": "tenant-2",
+    "templateId": "premium",
+    "slug": "",
+    "title": "Inicio",
+    "isPublished": true,
+    "sections": [
+      {
+        "id": "sec-2-1",
+        "type": "hero",
+        "order": 1,
+        "visible": true,
+        "content": {
+          "heading": "Excelencia en Cada Detalle",
+          "subheading": "Somos la agencia premium que lleva tu marca a nuevas alturas con diseño de lujo, estrategia exclusiva y resultados extraordinarios.",
+          "ctaText": "Descubrir Más",
+          "ctaUrl": "#sobre-nosotros",
+          "ctaSecondaryText": "Ver Portafolio",
+          "ctaSecondaryUrl": "#servicios",
+          "backgroundImage": "",
+          "overlayOpacity": 0.4
+        }
+      },
+      {
+        "id": "sec-2-2",
+        "type": "about",
+        "order": 2,
+        "visible": true,
+        "content": {
+          "heading": "Sobre Cliente Premium Corp",
+          "description": "Fundada en 2013, somos una agencia de experiencia premium con sede en Ciudad de México. Hemos trabajado con más de 200 marcas líderes en Latinoamérica, creando estrategias de branding, diseño y marketing que generan resultados medibles y sostenibles. Nuestro equipo multidisciplinario combina creatividad, datos y tecnología para crear experiencias de marca inolvidables.",
+          "image": "/images/about-premium.jpg",
+          "imagePosition": "right"
+        }
+      },
+      {
+        "id": "sec-2-3",
+        "type": "services",
+        "order": 3,
+        "visible": true,
+        "content": {
+          "heading": "Servicios Premium",
+          "subtitle": "Soluciones de alto impacto para marcas que buscan la excelencia",
+          "items": [
+            {
+              "id": "svc-1",
+              "icon": "✨",
+              "title": "Branding de Lujo",
+              "description": "Creamos identidades visuales sofisticadas que transmiten exclusividad y diferencian tu marca en el mercado."
+            },
+            {
+              "id": "svc-2",
+              "icon": "🎯",
+              "title": "Estrategia Digital",
+              "description": "Desarrollamos estrategias digitales personalizadas que maximizan tu presencia online y generan conversiones."
+            },
+            {
+              "id": "svc-3",
+              "icon": "🎨",
+              "title": "Diseño UX/UI Premium",
+              "description": "Interfaces elegantes y funcionales que deleitan a tus usuarios y elevan la percepción de tu marca."
+            },
+            {
+              "id": "svc-4",
+              "icon": "📱",
+              "title": "Campañas Exclusivas",
+              "description": "Campañas de marketing integradas que conectan emocionalmente con tu audiencia y amplifican tu mensaje."
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-2-4",
+        "type": "testimonials",
+        "order": 4,
+        "visible": true,
+        "content": {
+          "heading": "Lo que dicen nuestros clientes",
+          "items": [
+            {
+              "id": "test-1",
+              "quote": "Trabajar con Cliente Premium Corp transformó completamente nuestra marca. El equipo superó todas nuestras expectativas con una creatividad y profesionalismo excepcionales.",
+              "author": "Alejandra Vega",
+              "role": "CEO, Luxury Brands México",
+              "avatar": "",
+              "rating": 5
+            },
+            {
+              "id": "test-2",
+              "quote": "La estrategia digital que desarrollaron para nosotros incrementó nuestras ventas en un 340% en solo seis meses. Un equipo verdaderamente extraordinario.",
+              "author": "Fernando Ríos",
+              "role": "Director de Marketing, Grupo Élite",
+              "avatar": "",
+              "rating": 5
+            },
+            {
+              "id": "test-3",
+              "quote": "Su atención al detalle y comprensión profunda de nuestro mercado nos permitió lanzar una campaña que resonó perfectamente con nuestra audiencia premium.",
+              "author": "Valentina Montoya",
+              "role": "Fundadora, Casa Montoya",
+              "avatar": "",
+              "rating": 5
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-2-5",
+        "type": "footer",
+        "order": 5,
+        "visible": true,
+        "content": {
+          "text": "© 2026 Cliente Premium Corp. Todos los derechos reservados.",
+          "columns": [
+            {
+              "title": "Servicios",
+              "links": [
+                {
+                  "label": "Branding",
+                  "url": "#"
+                },
+                {
+                  "label": "Estrategia",
+                  "url": "#"
+                },
+                {
+                  "label": "Diseño UX/UI",
+                  "url": "#"
+                },
+                {
+                  "label": "Campañas",
+                  "url": "#"
+                }
+              ]
+            },
+            {
+              "title": "Empresa",
+              "links": [
+                {
+                  "label": "Sobre Nosotros",
+                  "url": "#"
+                },
+                {
+                  "label": "Portafolio",
+                  "url": "#"
+                },
+                {
+                  "label": "Casos de Éxito",
+                  "url": "#"
+                },
+                {
+                  "label": "Contacto",
+                  "url": "#"
+                }
+              ]
+            }
+          ],
+          "socialLinks": [
+            {
+              "platform": "Instagram",
+              "url": "#"
+            },
+            {
+              "platform": "LinkedIn",
+              "url": "#"
+            },
+            {
+              "platform": "Behance",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "metadata": {
+      "title": "Inicio | Cliente Premium Corp",
+      "description": "Agencia premium de branding, estrategia digital y marketing para marcas líderes en Latinoamérica."
+    },
+    "createdAt": "2024-02-10T09:00:00Z",
+    "updatedAt": "2026-01-05T14:00:00Z"
+  },
+  {
+    "id": "page-3",
+    "tenantId": "tenant-3",
+    "templateId": "minimal",
+    "slug": "",
+    "title": "Inicio",
+    "isPublished": true,
+    "sections": [
+      {
+        "id": "sec-3-1",
+        "type": "hero",
+        "order": 1,
+        "visible": true,
+        "content": {
+          "heading": "Diseño que respira.",
+          "subheading": "Creamos identidades visuales limpias y efectivas. Sin ruido. Solo lo esencial.",
+          "ctaText": "Ver Trabajo",
+          "ctaUrl": "#trabajo",
+          "ctaSecondaryText": "",
+          "ctaSecondaryUrl": "",
+          "backgroundImage": "",
+          "overlayOpacity": 0
+        }
+      },
+      {
+        "id": "sec-3-2",
+        "type": "cta-banner",
+        "order": 2,
+        "visible": true,
+        "content": {
+          "heading": "¿Tienes un proyecto en mente?",
+          "description": "Hablemos sobre cómo el diseño minimalista puede transformar tu marca.",
+          "ctaText": "Iniciar Conversación",
+          "ctaUrl": "mailto:hola@minimalstudio.mx",
+          "backgroundColor": "#000000"
+        }
+      },
+      {
+        "id": "sec-3-3",
+        "type": "footer",
+        "order": 3,
+        "visible": true,
+        "content": {
+          "text": "© 2026 Minimal Studio. Todos los derechos reservados.",
+          "columns": [
+            {
+              "title": "Trabajo",
+              "links": [
+                {
+                  "label": "Branding",
+                  "url": "#"
+                },
+                {
+                  "label": "Web",
+                  "url": "#"
+                },
+                {
+                  "label": "Print",
+                  "url": "#"
+                }
+              ]
+            },
+            {
+              "title": "Contacto",
+              "links": [
+                {
+                  "label": "hola@minimalstudio.mx",
+                  "url": "mailto:hola@minimalstudio.mx"
+                },
+                {
+                  "label": "CDMX, México",
+                  "url": "#"
+                }
+              ]
+            }
+          ],
+          "socialLinks": [
+            {
+              "platform": "Instagram",
+              "url": "#"
+            },
+            {
+              "platform": "Dribbble",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "metadata": {
+      "title": "Minimal Studio - Diseño que Respira",
+      "description": "Estudio de diseño minimalista especializado en branding e identidad visual. CDMX, México."
+    },
+    "createdAt": "2024-03-01T08:00:00Z",
+    "updatedAt": "2026-01-10T16:00:00Z"
+  },
+  {
+    "id": "page-4",
+    "tenantId": "tenant-4",
+    "templateId": "legal",
+    "slug": "",
+    "title": "Inicio",
+    "isPublished": true,
+    "sections": [
+      {
+        "id": "sec-4-1",
+        "type": "hero",
+        "order": 1,
+        "visible": true,
+        "content": {
+          "heading": "Justicia con Experiencia y Dedicación",
+          "subheading": "Más de 25 años defendiendo los derechos de nuestros clientes con profesionalismo, ética y resultados comprobados.",
+          "ctaText": "Consulta Gratuita",
+          "ctaUrl": "#contacto",
+          "ctaSecondaryText": "Conocer el Despacho",
+          "ctaSecondaryUrl": "/about",
+          "backgroundImage": "",
+          "overlayOpacity": 0.7
+        }
+      },
+      {
+        "id": "sec-4-2",
+        "type": "services",
+        "order": 2,
+        "visible": true,
+        "content": {
+          "heading": "Áreas de Práctica",
+          "subtitle": "Experiencia especializada en las principales ramas del derecho mexicano",
+          "items": [
+            {
+              "id": "svc-1",
+              "icon": "🏢",
+              "title": "Derecho Corporativo",
+              "description": "Constitución de empresas, contratos comerciales, fusiones y adquisiciones, gobierno corporativo y asesoría legal continua para negocios."
+            },
+            {
+              "id": "svc-2",
+              "icon": "⚖️",
+              "title": "Derecho Laboral",
+              "description": "Defensa de trabajadores y empleadores en conflictos laborales, contratos colectivos, seguridad social y cumplimiento normativo."
+            },
+            {
+              "id": "svc-3",
+              "icon": "🔒",
+              "title": "Derecho Penal",
+              "description": "Representación integral en procesos penales, defensa de imputados, asesoría a víctimas y amparo en materia penal."
+            },
+            {
+              "id": "svc-4",
+              "icon": "💡",
+              "title": "Propiedad Intelectual",
+              "description": "Registro y protección de marcas, patentes, derechos de autor, litigios por infracción y licensing internacional."
+            },
+            {
+              "id": "svc-5",
+              "icon": "👨‍👩‍👧",
+              "title": "Derecho Familiar",
+              "description": "Divorcios, custodia y guarda de menores, alimentos, adopciones, sucesiones y testamentos."
+            },
+            {
+              "id": "svc-6",
+              "icon": "📊",
+              "title": "Derecho Fiscal",
+              "description": "Planeación fiscal, defensa ante el SAT, litigios fiscales, devoluciones y compensaciones, IMSS e Infonavit."
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-4-3",
+        "type": "team",
+        "order": 3,
+        "visible": true,
+        "content": {
+          "heading": "Nuestro Equipo",
+          "subtitle": "Abogados altamente especializados comprometidos con su causa",
+          "members": [
+            {
+              "id": "mem-1",
+              "name": "Lic. Roberto García Morales",
+              "role": "Socio Fundador",
+              "image": "",
+              "bio": "Licenciado en Derecho por la UNAM con maestría en derecho corporativo por el ITAM. 25 años de experiencia en derecho corporativo y penal. Miembro del Colegio de Abogados de México."
+            },
+            {
+              "id": "mem-2",
+              "name": "Lic. María López Hernández",
+              "role": "Socia Senior",
+              "image": "",
+              "bio": "Especialista certificada en derecho familiar y propiedad intelectual. Egresada del ITESM con posgrado en la Universidad de Salamanca. Autora de múltiples publicaciones en derecho familiar."
+            },
+            {
+              "id": "mem-3",
+              "name": "Lic. Carlos Mendoza Torres",
+              "role": "Asociado Senior",
+              "image": "",
+              "bio": "Experto en derecho fiscal y laboral con amplia experiencia en litigios ante el TFJA y SCJN. Certificado por el IMCP en materia fiscal."
+            },
+            {
+              "id": "mem-4",
+              "name": "Lic. Sofía Ramírez Castro",
+              "role": "Asociada",
+              "image": "",
+              "bio": "Especialista en derecho penal y amparo. Egresada cum laude de la Universidad Iberoamericana. Ha participado en casos de alto impacto mediático."
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-4-4",
+        "type": "testimonials",
+        "order": 4,
+        "visible": true,
+        "content": {
+          "heading": "Testimonios de Clientes",
+          "items": [
+            {
+              "id": "test-1",
+              "quote": "Bufete Legal MX nos ayudó a resolver un complejo litigio corporativo que parecía imposible. Su equipo demostró un nivel de expertise y dedicación que superó ampliamente nuestras expectativas.",
+              "author": "Ing. Juan Carlos Pérez",
+              "role": "Director General, Constructora Pérez e Hijos",
+              "avatar": "",
+              "rating": 5
+            },
+            {
+              "id": "test-2",
+              "quote": "Gracias al Lic. García y su equipo, pude proteger mi marca registrada a nivel internacional. El proceso fue claro, eficiente y los resultados fueron exactamente lo que necesitaba.",
+              "author": "Dra. Ana Martínez Vidal",
+              "role": "Fundadora, Laboratorios Martínez",
+              "avatar": "",
+              "rating": 5
+            },
+            {
+              "id": "test-3",
+              "quote": "La Lic. López nos apoyó durante un difícil proceso de divorcio y custodia. Su sensibilidad, profesionalismo y conocimiento del derecho familiar marcaron una diferencia enorme en el resultado.",
+              "author": "Roberto Sánchez",
+              "role": "Cliente en Derecho Familiar",
+              "avatar": "",
+              "rating": 5
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-4-5",
+        "type": "stats",
+        "order": 5,
+        "visible": true,
+        "content": {
+          "heading": "Trayectoria que Respalda",
+          "items": [
+            {
+              "id": "stat-1",
+              "value": "25+",
+              "label": "Años de Experiencia",
+              "icon": "⚖️"
+            },
+            {
+              "id": "stat-2",
+              "value": "1,200+",
+              "label": "Casos Resueltos",
+              "icon": "✅"
+            },
+            {
+              "id": "stat-3",
+              "value": "95%",
+              "label": "Tasa de Éxito",
+              "icon": "🏆"
+            },
+            {
+              "id": "stat-4",
+              "value": "6",
+              "label": "Áreas de Práctica",
+              "icon": "📚"
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-4-6",
+        "type": "cta-banner",
+        "order": 6,
+        "visible": true,
+        "content": {
+          "heading": "¿Necesita Asesoría Legal?",
+          "description": "Ofrecemos una primera consulta gratuita para evaluar su caso. Contáctenos hoy mismo.",
+          "ctaText": "Solicitar Consulta Gratuita",
+          "ctaUrl": "#contacto",
+          "backgroundColor": "#1E3A5F"
+        }
+      },
+      {
+        "id": "sec-4-7",
+        "type": "footer",
+        "order": 7,
+        "visible": true,
+        "content": {
+          "text": "© 2026 Bufete Legal MX - Todos los derechos reservados | Cédula Profesional 1234567",
+          "columns": [
+            {
+              "title": "Oficinas",
+              "links": [
+                {
+                  "label": "Av. Reforma 123, Col. Centro",
+                  "url": "#"
+                },
+                {
+                  "label": "Ciudad de México, CDMX",
+                  "url": "#"
+                },
+                {
+                  "label": "Tel: (55) 5555-0100",
+                  "url": "tel:5555550100"
+                },
+                {
+                  "label": "contacto@bufetemx.mx",
+                  "url": "mailto:contacto@bufetemx.mx"
+                }
+              ]
+            },
+            {
+              "title": "Horario",
+              "links": [
+                {
+                  "label": "Lunes a Viernes",
+                  "url": "#"
+                },
+                {
+                  "label": "9:00 – 19:00 hrs",
+                  "url": "#"
+                },
+                {
+                  "label": "Sábado",
+                  "url": "#"
+                },
+                {
+                  "label": "10:00 – 14:00 hrs",
+                  "url": "#"
+                }
+              ]
+            },
+            {
+              "title": "Legal",
+              "links": [
+                {
+                  "label": "Aviso de Privacidad",
+                  "url": "#"
+                },
+                {
+                  "label": "Términos y Condiciones",
+                  "url": "#"
+                },
+                {
+                  "label": "Código de Ética",
+                  "url": "#"
+                },
+                {
+                  "label": "Colegio de Abogados",
+                  "url": "#"
+                }
+              ]
+            }
+          ],
+          "socialLinks": [
+            {
+              "platform": "LinkedIn",
+              "url": "#"
+            },
+            {
+              "platform": "Twitter",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "metadata": {
+      "title": "Inicio | Bufete Legal MX - Abogados de Confianza",
+      "description": "Despacho de abogados con 25 años de experiencia en derecho corporativo, laboral, penal, fiscal y familiar en México."
+    },
+    "createdAt": "2023-06-01T07:00:00Z",
+    "updatedAt": "2026-01-15T18:00:00Z"
+  },
+  {
+    "id": "page-5",
+    "tenantId": "tenant-4",
+    "templateId": "legal",
+    "slug": "about",
+    "title": "Nosotros",
+    "isPublished": true,
+    "sections": [
+      {
+        "id": "sec-5-1",
+        "type": "hero",
+        "order": 1,
+        "visible": true,
+        "content": {
+          "heading": "Quiénes Somos",
+          "subheading": "Un despacho fundado sobre los pilares de la ética, la excelencia y el compromiso irrestricto con la justicia.",
+          "ctaText": "Contactar",
+          "ctaUrl": "/#contacto",
+          "ctaSecondaryText": "",
+          "ctaSecondaryUrl": "",
+          "backgroundImage": "",
+          "overlayOpacity": 0.7
+        }
+      },
+      {
+        "id": "sec-5-2",
+        "type": "about",
+        "order": 2,
+        "visible": true,
+        "content": {
+          "heading": "Nuestra Historia",
+          "description": "Bufete Legal MX fue fundado en el año 2001 por el Lic. Roberto García Morales con la visión de crear un despacho que combinara el rigor académico con la experiencia práctica. A lo largo de más de dos décadas, hemos construido una reputación sólida basada en resultados concretos y en la confianza que nuestros clientes depositan en nosotros.\n\nHoy somos un equipo de 12 abogados especializados en las principales ramas del derecho mexicano, con presencia en Ciudad de México y Guadalajara. Nuestro enfoque multidisciplinario nos permite ofrecer soluciones legales integrales que abordan cada aspecto de las necesidades jurídicas de nuestros clientes.",
+          "image": "/images/despacho.jpg",
+          "imagePosition": "left"
+        }
+      },
+      {
+        "id": "sec-5-3",
+        "type": "team",
+        "order": 3,
+        "visible": true,
+        "content": {
+          "heading": "Nuestros Socios y Asociados",
+          "subtitle": "Conoce al equipo que estará a tu lado en cada etapa del proceso legal",
+          "members": [
+            {
+              "id": "mem-1",
+              "name": "Lic. Roberto García Morales",
+              "role": "Socio Fundador",
+              "image": "",
+              "bio": "Licenciado en Derecho por la UNAM con maestría en derecho corporativo por el ITAM. 25 años de experiencia en derecho corporativo y penal. Miembro del Colegio de Abogados de México."
+            },
+            {
+              "id": "mem-2",
+              "name": "Lic. María López Hernández",
+              "role": "Socia Senior",
+              "image": "",
+              "bio": "Especialista certificada en derecho familiar y propiedad intelectual. Egresada del ITESM con posgrado en la Universidad de Salamanca."
+            },
+            {
+              "id": "mem-3",
+              "name": "Lic. Carlos Mendoza Torres",
+              "role": "Asociado Senior",
+              "image": "",
+              "bio": "Experto en derecho fiscal y laboral con amplia experiencia en litigios ante el TFJA y SCJN."
+            },
+            {
+              "id": "mem-4",
+              "name": "Lic. Sofía Ramírez Castro",
+              "role": "Asociada",
+              "image": "",
+              "bio": "Especialista en derecho penal y amparo. Egresada cum laude de la Universidad Iberoamericana."
+            }
+          ]
+        }
+      },
+      {
+        "id": "sec-5-4",
+        "type": "footer",
+        "order": 4,
+        "visible": true,
+        "content": {
+          "text": "© 2026 Bufete Legal MX - Todos los derechos reservados | Cédula Profesional 1234567",
+          "columns": [
+            {
+              "title": "Oficinas",
+              "links": [
+                {
+                  "label": "Av. Reforma 123, Col. Centro",
+                  "url": "#"
+                },
+                {
+                  "label": "Ciudad de México, CDMX",
+                  "url": "#"
+                },
+                {
+                  "label": "Tel: (55) 5555-0100",
+                  "url": "tel:5555550100"
+                }
+              ]
+            },
+            {
+              "title": "Horario",
+              "links": [
+                {
+                  "label": "Lun–Vie: 9:00–19:00",
+                  "url": "#"
+                },
+                {
+                  "label": "Sáb: 10:00–14:00",
+                  "url": "#"
+                }
+              ]
+            },
+            {
+              "title": "Legal",
+              "links": [
+                {
+                  "label": "Aviso de Privacidad",
+                  "url": "#"
+                },
+                {
+                  "label": "Términos y Condiciones",
+                  "url": "#"
+                }
+              ]
+            }
+          ],
+          "socialLinks": [
+            {
+              "platform": "LinkedIn",
+              "url": "#"
+            },
+            {
+              "platform": "Twitter",
+              "url": "#"
+            }
+          ]
+        }
+      }
+    ],
+    "metadata": {
+      "title": "Nosotros | Bufete Legal MX",
+      "description": "Conoce la historia, filosofía y equipo de Bufete Legal MX. Más de 25 años de experiencia en derecho mexicano."
+    },
+    "createdAt": "2023-06-01T07:00:00Z",
+    "updatedAt": "2026-01-15T18:00:00Z"
+  }
+]
