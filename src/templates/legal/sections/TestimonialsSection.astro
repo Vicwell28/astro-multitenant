@@ -1,0 +1,42 @@
+---
+import type { TestimonialsContent, Tenant } from "../../../lib/types.ts";
+
+interface Props {
+  content: TestimonialsContent;
+  tenant: Tenant;
+}
+
+const { content, tenant } = Astro.props;
+const { heading, items } = content;
+const { theme } = tenant;
+---
+
+<section class="py-24 bg-gray-900">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mb-16 text-center">
+      <div class="mx-auto mb-4 flex items-center justify-center gap-4">
+        <div class="h-px w-12" style={`background: ${theme.accentColor};`}></div>
+        <span class="text-sm font-bold uppercase tracking-widest" style={`color: ${theme.accentColor};`}>Testimonios</span>
+        <div class="h-px w-12" style={`background: ${theme.accentColor};`}></div>
+      </div>
+      <h2 class="text-4xl font-bold text-white md:text-5xl" style="font-family: var(--font-heading, 'Playfair Display', serif);">{heading}</h2>
+    </div>
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => (
+        <div class="rounded-sm border border-gray-700 p-8" style={`border-top: 2px solid ${theme.accentColor};`}>
+          <div class="mb-4 text-5xl leading-none" style={`color: ${theme.accentColor};`}>"</div>
+          <p class="mb-6 italic leading-relaxed text-gray-300">"{item.quote}"</p>
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full text-sm" style={`background: ${theme.primaryColor};`}>
+              <span class="text-white">👤</span>
+            </div>
+            <div>
+              <p class="font-bold text-white">{item.author}</p>
+              {item.role && <p class="text-xs" style={`color: ${theme.accentColor};`}>{item.role}</p>}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

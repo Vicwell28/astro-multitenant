@@ -1,115 +1,244 @@
 # Astro Multi-Tenant SSR
 
-Proyecto completo de sitio web multi-tenant con Astro 5.x, 100% SSR, Tailwind CSS 4.x y TypeScript estricto.
+Proyecto completo de sitio web multi-tenant con Astro 5.x, 100% SSR, Tailwind CSS 4.x, TypeScript estricto y **arquitectura de secciones dinámicas** con persistencia local en JSON.
 
 ## ¿Qué es este proyecto?
 
-Un sistema donde una sola aplicación Astro sirve múltiples sitios web ("tenants") con diseños y contenidos completamente distintos. Cada tenant se identifica por su subdominio (producción) o por el query param `?tenant=` (desarrollo local).
+Un sistema donde una sola aplicación Astro sirve múltiples sitios web ("tenants") con diseños y contenidos completamente distintos. Cada página se compone de **secciones ordenadas** (hero, services, team, etc.) que se resuelven dinámicamente según el template del tenant.
 
-### Arquitectura
-
-```
-Request → Middleware → Extrae subdominio → Busca tenant en cache/DB
-       → Resuelve templateId → Renderiza plantilla con datos del tenant
-       → Devuelve HTML puro (0 JS) optimizado para SEO
-```
+Cada tenant se identifica por su subdominio (producción) o por el query param `?tenant=` (desarrollo local).
 
 ## Instalación y uso
 
 ```bash
-npm install
-npm run dev
+npm install && npm run dev
 ```
+
+La aplicación estará disponible en `http://localhost:4321`.
 
 ## Probar los 4 tenants en local
 
 Abre el navegador en:
 
-| Tenant       | URL de prueba                                  | Plantilla |
-|-------------|------------------------------------------------|-----------|
-| cliente1    | http://localhost:4321/?tenant=cliente1         | default   |
-| cliente2    | http://localhost:4321/?tenant=cliente2         | premium   |
-| cliente3    | http://localhost:4321/?tenant=cliente3         | minimal   |
-| bufetemx    | http://localhost:4321/?tenant=bufetemx         | legal     |
+| Tenant    | URL de prueba                          | Plantilla | Descripción                       |
+|-----------|----------------------------------------|-----------|-----------------------------------|
+| cliente1  | http://localhost:4321/?tenant=cliente1 | default   | Azul moderno con servicios y stats |
+| cliente2  | http://localhost:4321/?tenant=cliente2 | premium   | Violeta elegante con about         |
+| cliente3  | http://localhost:4321/?tenant=cliente3 | minimal   | Blanco y negro ultra limpio        |
+| bufetemx  | http://localhost:4321/?tenant=bufetemx | legal     | Azul oscuro con oro, bufete legal  |
+
+### Página adicional de bufetemx
+
+| URL                                          | Descripción        |
+|----------------------------------------------|--------------------|
+| http://localhost:4321/about?tenant=bufetemx  | Página "Nosotros"  |
+
+## Arquitectura
+
+```
+Request → Middleware → Extrae subdominio → Carga tenant desde data/tenants.json
+       → Carga página por slug desde data/pages.json → Inyecta en locals
+       → [...slug].astro → Filtra secciones visibles → Section Resolver
+       → Renderiza cada sección con el componente correcto (template o genérico)
+       → HTML puro con SEO completo
+```
+
+### Section Resolver
+
+El `section-resolver.ts` mapea `templateId + sectionType → componente Astro`:
+
+```
+templateId: "legal", sectionType: "services"
+  → templates/legal/sections/ServicesSection.astro  (específico)
+  
+templateId: "legal", sectionType: "faq"
+  → components/sections/FaqSection.astro  (genérico, fallback)
+```
 
 ## Estructura de carpetas
 
 ```
-src/
-├── env.d.ts                    # Tipos de App.Locals
-├── middleware/index.ts         # Extrae tenant, inyecta en locals, headers de cache
-├── lib/
-│   ├── types.ts                # Interface TenantConfig
-│   ├── cache.ts                # MemoryCache con TTL
-│   └── tenant.ts               # getTenantBySubdomain + mock data
-├── layouts/BaseLayout.astro    # SEO completo: OG, Twitter Card, JSON-LD
-├── styles/global.css           # @import "tailwindcss"
-├── templates/
-│   ├── default/                # Plantilla genérica azul
-│   ├── premium/                # Plantilla premium violeta
-│   ├── minimal/                # Plantilla minimalista negra
-│   └── legal/                  # Plantilla para bufetes jurídicos
-└── pages/
-    ├── [...slug].astro         # Catch-all → selecciona template según tenant
-    └── api/cache/invalidate.ts # POST para invalidar cache
+├── data/
+│   ├── tenants.json              # 4 tenants con configuración y theme
+│   └── pages.json                # 5 páginas con secciones completas
+├── src/
+│   ├── env.d.ts                  # App.Locals: { tenant, page }
+│   ├── middleware/index.ts       # Extrae tenant+página, cache headers
+│   ├── lib/
+│   │   ├── types.ts              # Tenant, Page, Section, SectionType, contenidos
+│   │   ├── cache.ts              # MemoryCache<T> con TTL (300s)
+│   │   ├── data-store.ts         # Lectura/escritura JSON + cache
+│   │   └── section-resolver.ts  # Mapeo templateId+type → import path
+│   ├── layouts/BaseLayout.astro  # SEO: title, meta, OG, Twitter, JSON-LD, favicon
+│   ├── styles/global.css         # @import "tailwindcss"
+│   ├── components/sections/      # 12 componentes genéricos (fallback)
+│   │   ├── HeroSection.astro
+│   │   ├── AboutSection.astro
+│   │   ├── ServicesSection.astro
+│   │   ├── TeamSection.astro
+│   │   ├── TestimonialsSection.astro
+│   │   ├── GallerySection.astro
+│   │   ├── ContactFormSection.astro
+│   │   ├── CtaBannerSection.astro
+│   │   ├── FaqSection.astro
+│   │   ├── PricingSection.astro
+│   │   ├── StatsSection.astro
+│   │   └── FooterSection.astro
+│   ├── templates/
+│   │   ├── default/sections/     # Hero (gradiente azul), Services (cards), Footer
+│   │   ├── premium/sections/     # Hero (púrpura con blobs), About, Footer
+│   │   ├── minimal/sections/     # Hero (b&w tipográfico), Footer (una línea)
+│   │   └── legal/sections/       # Hero (azul oscuro+oro), Services, Team, Testimonials, Footer
+│   └── pages/
+│       ├── [...slug].astro       # Catch-all con section-resolver
+│       └── api/
+│           ├── tenants/index.ts
+│           ├── pages/[pageId]/
+│           │   ├── index.ts                      # GET + PUT
+│           │   └── sections/[sectionId].ts       # PATCH
+│           └── cache/invalidate.ts               # POST
 ```
 
-## Flujo de una request
+## Modelo de datos
 
-1. Request llega a `cliente1.tudominio.com` (o `localhost:4321/?tenant=cliente1`)
-2. `src/middleware/index.ts` extrae el subdominio del `Host` header (o del query param en dev)
-3. `getTenantBySubdomain()` busca en `MemoryCache` → si miss, consulta la "DB" (mock en dev)
-4. El tenant se inyecta en `Astro.locals.tenant`
-5. `src/pages/[...slug].astro` resuelve la plantilla según `tenant.templateId`
-6. Se renderiza la plantilla con los datos del tenant (HTML puro, 0 JS)
-7. El middleware agrega headers `Cache-Control` y `Vary: Host`
+### Tenant (data/tenants.json)
 
-## Casos de uso
+```typescript
+interface Tenant {
+  id: string;
+  subdomain: string;
+  name: string;
+  logo?: string;
+  favicon?: string;
+  status: "active" | "inactive";
+  theme: {
+    primaryColor: string;
+    secondaryColor: string;
+    accentColor: string;
+    fontHeading?: string;
+    fontBody?: string;
+    borderRadius?: string;
+    customCss?: string;
+  };
+  metadata: { title: string; description: string; ogImage?: string; keywords?: string[] };
+  createdAt: string;
+  updatedAt: string;
+}
+```
 
-### Caso A – Cliente con plantilla genérica
-Solo requiere un registro en la base de datos con el `subdomain`, `templateId`, colores y contenido. No es necesario hacer deploy de nuevo código.
+### Page (data/pages.json)
 
-### Caso B – Cliente con plantilla personalizada
-Requiere:
-1. Crear una nueva carpeta `src/templates/mi-plantilla/`
-2. Registrar el `templateId` en `TEMPLATE_MAP` en `[...slug].astro`
-3. Hacer un deploy de la aplicación
-4. Registrar el tenant en la DB
+```typescript
+interface Page {
+  id: string;
+  tenantId: string;
+  templateId: string;
+  slug: string;      // "" para inicio, "about" para /about
+  title: string;
+  isPublished: boolean;
+  sections: Section[];
+  metadata: { title: string; description: string; ogImage?: string };
+}
 
-## Invalidar cache
+interface Section {
+  id: string;
+  type: SectionType;  // "hero" | "services" | "team" | ...
+  order: number;
+  visible: boolean;
+  content: SectionContent;
+}
+```
+
+### Tipos de sección soportados
+
+`hero` · `about` · `services` · `team` · `testimonials` · `gallery` · `contact-form` · `cta-banner` · `faq` · `pricing` · `stats` · `footer`
+
+## API Endpoints
+
+### GET /api/tenants
+Devuelve todos los tenants de `data/tenants.json`.
 
 ```bash
+curl http://localhost:4321/api/tenants
+```
+
+### GET /api/pages/:pageId
+Devuelve una página con todas sus secciones.
+
+```bash
+curl http://localhost:4321/api/pages/page-1
+```
+
+### PUT /api/pages/:pageId
+Actualiza una página completa. Escribe en `data/pages.json`.
+
+```bash
+curl -X PUT http://localhost:4321/api/pages/page-1 \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Nueva página"}'
+```
+
+### PATCH /api/pages/:pageId/sections/:sectionId
+Actualiza el contenido de una sección específica.
+
+```bash
+curl -X PATCH http://localhost:4321/api/pages/page-1/sections/sec-1-1 \
+  -H "Content-Type: application/json" \
+  -d '{"content":{"heading":"Nuevo título","subheading":"Nuevo subtítulo","ctaText":"CTA","ctaUrl":"#"}}'
+```
+
+### POST /api/cache/invalidate
+Invalida el cache de un tenant específico o todo el cache.
+
+```bash
+# Invalidar un tenant
 curl -X POST http://localhost:4321/api/cache/invalidate \
-  -H "Authorization: Bearer TU_ADMIN_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"subdomain": "cliente1"}'
-```
 
-Para invalidar todo el cache, omite `subdomain` del body:
-
-```bash
+# Invalidar todo
 curl -X POST http://localhost:4321/api/cache/invalidate \
-  -H "Authorization: Bearer TU_ADMIN_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{}'
 ```
 
-Define `ADMIN_API_KEY` en tu archivo `.env`:
+## Agregar un nuevo tenant
 
+1. Agrega el tenant a `data/tenants.json`:
+```json
+{
+  "id": "tenant-5",
+  "subdomain": "micliente",
+  "name": "Mi Cliente",
+  "status": "active",
+  "theme": { "primaryColor": "#...", "secondaryColor": "#...", "accentColor": "#..." },
+  "metadata": { "title": "Mi Cliente", "description": "..." },
+  "createdAt": "2026-01-01T00:00:00Z",
+  "updatedAt": "2026-01-01T00:00:00Z"
+}
 ```
-ADMIN_API_KEY=mi-clave-secreta
-```
+
+2. Agrega su página a `data/pages.json` con las secciones deseadas.
+3. Prueba en `http://localhost:4321/?tenant=micliente`.
+
+## Agregar un nuevo template
+
+1. Crea `src/templates/mi-template/sections/` con los componentes que quieras sobrescribir.
+2. Agrega el mapeo en `[...slug].astro` en el `componentMap`.
+3. Registra los tenants que usarán `templateId: "mi-template"`.
 
 ## Notas para producción
 
-- **Base de datos**: Reemplaza el mock en `src/lib/tenant.ts` con una consulta real a Cosmos DB u otra API
-- **Cache distribuido**: Reemplaza `MemoryCache` por Redis para entornos con múltiples instancias
-- **CDN**: Con los headers `Cache-Control: s-maxage=60, stale-while-revalidate=300` y `Vary: Host`, un CDN (Cloudflare, Fastly) puede cachear las páginas por subdominio
-- **Subdominios en producción**: Configura un wildcard DNS `*.tudominio.com → tu servidor`
+- **Persistencia**: Los archivos `data/tenants.json` y `data/pages.json` actúan como base de datos local. En producción, reemplaza `data-store.ts` con consultas a una BD real.
+- **Cache distribuido**: Reemplaza `MemoryCache` por Redis para entornos multi-instancia.
+- **CDN**: Los headers `Cache-Control: s-maxage=60, stale-while-revalidate=300` y `Vary: Host` permiten cacheo por subdominio en Cloudflare/Fastly.
+- **Subdominios**: Configura un wildcard DNS `*.tudominio.com → tu servidor`.
 
 ## Stack tecnológico
 
 - **Astro 5.x** – SSR mode (`output: "server"`)
 - **@astrojs/node** – Adapter standalone
 - **Tailwind CSS 4.x** – Vía `@tailwindcss/vite` plugin
-- **TypeScript** – Configuración estricta
+- **TypeScript** – Configuración estricta (`astro/tsconfigs/strict`)
+- **vite** – En devDependencies explícitamente (requerido para resolución de módulos)
+

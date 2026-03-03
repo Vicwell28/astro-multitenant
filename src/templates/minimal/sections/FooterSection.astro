@@ -1,0 +1,26 @@
+---
+import type { FooterContent, Tenant } from "../../../lib/types.ts";
+
+interface Props {
+  content: FooterContent;
+  tenant: Tenant;
+}
+
+const { content, tenant } = Astro.props;
+const { text, socialLinks } = content;
+---
+
+<footer class="border-t border-gray-200 bg-white py-8">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+      <p class="text-sm text-gray-500">{text}</p>
+      {socialLinks && socialLinks.length > 0 && (
+        <div class="flex gap-6">
+          {socialLinks.map((s) => (
+            <a href={s.url} class="text-sm text-gray-500 transition-colors hover:text-black">{s.platform}</a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</footer>

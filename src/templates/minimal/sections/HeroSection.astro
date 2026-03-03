@@ -1,0 +1,32 @@
+---
+import type { HeroContent, Tenant } from "../../../lib/types.ts";
+
+interface Props {
+  content: HeroContent;
+  tenant: Tenant;
+}
+
+const { content } = Astro.props;
+const { heading, subheading, ctaText, ctaUrl } = content;
+---
+
+<section class="flex min-h-[90vh] items-center justify-center bg-white">
+  <div class="mx-auto max-w-3xl px-6 py-32 text-center">
+    <h1 class="mb-8 text-6xl font-black leading-none tracking-tighter text-black md:text-8xl">
+      {heading}
+    </h1>
+    {subheading && (
+      <p class="mx-auto mb-12 max-w-xl text-lg text-gray-500">
+        {subheading}
+      </p>
+    )}
+    {ctaText && ctaUrl && (
+      <a
+        href={ctaUrl}
+        class="inline-block border-2 border-black px-10 py-4 text-lg font-bold text-black transition-all hover:bg-black hover:text-white"
+      >
+        {ctaText}
+      </a>
+    )}
+  </div>
+</section>

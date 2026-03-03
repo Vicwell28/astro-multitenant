@@ -1,0 +1,44 @@
+---
+import type { TeamContent, Tenant } from "../../../lib/types.ts";
+
+interface Props {
+  content: TeamContent;
+  tenant: Tenant;
+}
+
+const { content, tenant } = Astro.props;
+const { heading, subtitle, members } = content;
+const { theme } = tenant;
+---
+
+<section class="py-24 bg-white">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mb-16 text-center">
+      <div class="mx-auto mb-4 flex items-center justify-center gap-4">
+        <div class="h-px w-12" style={`background: ${theme.accentColor};`}></div>
+        <span class="text-sm font-bold uppercase tracking-widest" style={`color: ${theme.accentColor};`}>Nuestro Equipo</span>
+        <div class="h-px w-12" style={`background: ${theme.accentColor};`}></div>
+      </div>
+      <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl" style="font-family: var(--font-heading, 'Playfair Display', serif);">{heading}</h2>
+      {subtitle && <p class="mx-auto max-w-2xl text-lg text-gray-600">{subtitle}</p>}
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {members.map((member) => (
+        <div class="text-center">
+          {member.image ? (
+            <img src={member.image} alt={member.name}
+              class="mx-auto mb-5 h-32 w-32 rounded-full object-cover shadow-lg ring-4 ring-white" />
+          ) : (
+            <div class="mx-auto mb-5 flex h-32 w-32 items-center justify-center rounded-full text-4xl shadow-lg ring-4 ring-white"
+              style={`background: ${theme.primaryColor}15;`}>
+              👤
+            </div>
+          )}
+          <h3 class="mb-1 text-lg font-bold text-gray-900" style="font-family: var(--font-heading, 'Playfair Display', serif);">{member.name}</h3>
+          <p class="mb-3 text-sm font-semibold uppercase tracking-wider" style={`color: ${theme.accentColor};`}>{member.role}</p>
+          {member.bio && <p class="text-sm leading-relaxed text-gray-600">{member.bio}</p>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

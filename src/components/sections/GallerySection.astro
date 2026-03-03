@@ -1,0 +1,31 @@
+---
+import type { GalleryContent, Tenant } from "../../lib/types.ts";
+
+interface Props {
+  content: GalleryContent;
+  tenant: Tenant;
+}
+
+const { content } = Astro.props;
+const { heading, images } = content;
+---
+
+<section class="py-20 bg-white">
+  <div class="mx-auto max-w-6xl px-6">
+    <h2 class="mb-12 text-center text-4xl font-bold text-gray-900">{heading}</h2>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {images.map((img) => (
+        <div class="overflow-hidden rounded-xl">
+          <img
+            src={img.url}
+            alt={img.alt}
+            class="h-56 w-full object-cover transition-transform hover:scale-105"
+          />
+          {img.caption && (
+            <p class="mt-2 text-center text-sm text-gray-500">{img.caption}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

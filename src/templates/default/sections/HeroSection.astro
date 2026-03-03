@@ -1,0 +1,53 @@
+---
+import type { HeroContent, Tenant } from "../../../lib/types.ts";
+
+interface Props {
+  content: HeroContent;
+  tenant: Tenant;
+}
+
+const { content, tenant } = Astro.props;
+const { heading, subheading, ctaText, ctaUrl, ctaSecondaryText, ctaSecondaryUrl } = content;
+const { theme } = tenant;
+---
+
+<section class="relative flex min-h-[80vh] items-center overflow-hidden" style={`background: linear-gradient(135deg, ${theme.primaryColor} 0%, #1e40af 60%, #0f172a 100%);`}>
+  <!-- Decorative circles -->
+  <div class="absolute -right-24 -top-24 h-96 w-96 rounded-full opacity-10" style={`background: ${theme.accentColor};`}></div>
+  <div class="absolute -bottom-12 -left-12 h-64 w-64 rounded-full opacity-10" style={`background: ${theme.accentColor};`}></div>
+
+  <div class="relative z-10 mx-auto max-w-5xl px-6 py-24">
+    <div class="max-w-2xl">
+      <span class="mb-4 inline-block rounded-full px-4 py-1 text-sm font-semibold" style={`background: ${theme.accentColor}20; color: ${theme.accentColor};`}>
+        Bienvenido
+      </span>
+      <h1 class="mb-6 text-5xl font-extrabold leading-tight text-white md:text-6xl">
+        {heading}
+      </h1>
+      {subheading && (
+        <p class="mb-10 text-xl leading-relaxed text-blue-100">
+          {subheading}
+        </p>
+      )}
+      <div class="flex flex-wrap gap-4">
+        {ctaText && ctaUrl && (
+          <a
+            href={ctaUrl}
+            class="rounded-lg px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
+            style={`background: ${theme.accentColor};`}
+          >
+            {ctaText}
+          </a>
+        )}
+        {ctaSecondaryText && ctaSecondaryUrl && (
+          <a
+            href={ctaSecondaryUrl}
+            class="rounded-lg border-2 border-white px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-white hover:text-blue-900"
+          >
+            {ctaSecondaryText}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

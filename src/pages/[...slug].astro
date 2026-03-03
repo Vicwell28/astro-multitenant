@@ -1,35 +1,144 @@
 ---
-import type { TenantConfig } from "../lib/types.ts";
-import DefaultTemplate from "../templates/default/index.astro";
-import PremiumTemplate from "../templates/premium/index.astro";
-import MinimalTemplate from "../templates/minimal/index.astro";
-import LegalTemplate from "../templates/legal/index.astro";
+import type { Tenant, Page, Section, SectionType } from "../lib/types.ts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Generic section components
+import GenericHero from "../components/sections/HeroSection.astro";
+import GenericAbout from "../components/sections/AboutSection.astro";
+import GenericServices from "../components/sections/ServicesSection.astro";
+import GenericTeam from "../components/sections/TeamSection.astro";
+import GenericTestimonials from "../components/sections/TestimonialsSection.astro";
+import GenericGallery from "../components/sections/GallerySection.astro";
+import GenericContactForm from "../components/sections/ContactFormSection.astro";
+import GenericCtaBanner from "../components/sections/CtaBannerSection.astro";
+import GenericFaq from "../components/sections/FaqSection.astro";
+import GenericPricing from "../components/sections/PricingSection.astro";
+import GenericStats from "../components/sections/StatsSection.astro";
+import GenericFooter from "../components/sections/FooterSection.astro";
+
+// Default template sections
+import DefaultHero from "../templates/default/sections/HeroSection.astro";
+import DefaultServices from "../templates/default/sections/ServicesSection.astro";
+import DefaultFooter from "../templates/default/sections/FooterSection.astro";
+
+// Premium template sections
+import PremiumHero from "../templates/premium/sections/HeroSection.astro";
+import PremiumAbout from "../templates/premium/sections/AboutSection.astro";
+import PremiumFooter from "../templates/premium/sections/FooterSection.astro";
+
+// Minimal template sections
+import MinimalHero from "../templates/minimal/sections/HeroSection.astro";
+import MinimalFooter from "../templates/minimal/sections/FooterSection.astro";
+
+// Legal template sections
+import LegalHero from "../templates/legal/sections/HeroSection.astro";
+import LegalServices from "../templates/legal/sections/ServicesSection.astro";
+import LegalTeam from "../templates/legal/sections/TeamSection.astro";
+import LegalTestimonials from "../templates/legal/sections/TestimonialsSection.astro";
+import LegalFooter from "../templates/legal/sections/FooterSection.astro";
 
 export const prerender = false;
 
-const { slug } = Astro.params;
-const tenant = Astro.locals.tenant;
+const tenant = Astro.locals.tenant as Tenant | null;
+const page = Astro.locals.page as Page | null;
 
 if (!tenant) {
   return Astro.redirect("/404");
 }
 
-const TEMPLATE_MAP = {
-  default: DefaultTemplate,
-  premium: PremiumTemplate,
-  minimal: MinimalTemplate,
-  legal: LegalTemplate,
-} as const;
-
-type TemplateId = keyof typeof TEMPLATE_MAP;
-
-const Template = TEMPLATE_MAP[tenant.templateId as TemplateId];
-
-if (!Template) {
-  return new Response(`Template "${tenant.templateId}" not found`, { status: 500 });
+if (!page) {
+  return new Response("Página no encontrada", { status: 404 });
 }
 
-const slugParts = slug ? slug.split("/").filter(Boolean) : [];
+// Section resolver: maps templateId + sectionType → component
+type AstroComponent = Parameters<typeof GenericHero>[0] extends object ? typeof GenericHero : never;
+
+const componentMap: Record<string, Record<SectionType, typeof GenericHero>> = {
+  default: {
+    hero: DefaultHero as typeof GenericHero,
+    about: GenericAbout as typeof GenericHero,
+    services: DefaultServices as typeof GenericHero,
+    team: GenericTeam as typeof GenericHero,
+    testimonials: GenericTestimonials as typeof GenericHero,
+    gallery: GenericGallery as typeof GenericHero,
+    "contact-form": GenericContactForm as typeof GenericHero,
+    "cta-banner": GenericCtaBanner as typeof GenericHero,
+    faq: GenericFaq as typeof GenericHero,
+    pricing: GenericPricing as typeof GenericHero,
+    stats: GenericStats as typeof GenericHero,
+    footer: DefaultFooter as typeof GenericHero,
+  },
+  premium: {
+    hero: PremiumHero as typeof GenericHero,
+    about: PremiumAbout as typeof GenericHero,
+    services: GenericServices as typeof GenericHero,
+    team: GenericTeam as typeof GenericHero,
+    testimonials: GenericTestimonials as typeof GenericHero,
+    gallery: GenericGallery as typeof GenericHero,
+    "contact-form": GenericContactForm as typeof GenericHero,
+    "cta-banner": GenericCtaBanner as typeof GenericHero,
+    faq: GenericFaq as typeof GenericHero,
+    pricing: GenericPricing as typeof GenericHero,
+    stats: GenericStats as typeof GenericHero,
+    footer: PremiumFooter as typeof GenericHero,
+  },
+  minimal: {
+    hero: MinimalHero as typeof GenericHero,
+    about: GenericAbout as typeof GenericHero,
+    services: GenericServices as typeof GenericHero,
+    team: GenericTeam as typeof GenericHero,
+    testimonials: GenericTestimonials as typeof GenericHero,
+    gallery: GenericGallery as typeof GenericHero,
+    "contact-form": GenericContactForm as typeof GenericHero,
+    "cta-banner": GenericCtaBanner as typeof GenericHero,
+    faq: GenericFaq as typeof GenericHero,
+    pricing: GenericPricing as typeof GenericHero,
+    stats: GenericStats as typeof GenericHero,
+    footer: MinimalFooter as typeof GenericHero,
+  },
+  legal: {
+    hero: LegalHero as typeof GenericHero,
+    about: GenericAbout as typeof GenericHero,
+    services: LegalServices as typeof GenericHero,
+    team: LegalTeam as typeof GenericHero,
+    testimonials: LegalTestimonials as typeof GenericHero,
+    gallery: GenericGallery as typeof GenericHero,
+    "contact-form": GenericContactForm as typeof GenericHero,
+    "cta-banner": GenericCtaBanner as typeof GenericHero,
+    faq: GenericFaq as typeof GenericHero,
+    pricing: GenericPricing as typeof GenericHero,
+    stats: GenericStats as typeof GenericHero,
+    footer: LegalFooter as typeof GenericHero,
+  },
+};
+
+const genericComponents: Record<SectionType, typeof GenericHero> = {
+  hero: GenericHero,
+  about: GenericAbout as typeof GenericHero,
+  services: GenericServices as typeof GenericHero,
+  team: GenericTeam as typeof GenericHero,
+  testimonials: GenericTestimonials as typeof GenericHero,
+  gallery: GenericGallery as typeof GenericHero,
+  "contact-form": GenericContactForm as typeof GenericHero,
+  "cta-banner": GenericCtaBanner as typeof GenericHero,
+  faq: GenericFaq as typeof GenericHero,
+  pricing: GenericPricing as typeof GenericHero,
+  stats: GenericStats as typeof GenericHero,
+  footer: GenericFooter as typeof GenericHero,
+};
+
+function resolveComponent(templateId: string, sectionType: SectionType): typeof GenericHero {
+  return componentMap[templateId]?.[sectionType] ?? genericComponents[sectionType] ?? GenericHero;
+}
+
+const visibleSections = page.sections
+  .filter((s: Section) => s.visible)
+  .sort((a: Section, b: Section) => a.order - b.order);
 ---
 
-<Template tenant={tenant} slug={slugParts} />
+<BaseLayout tenant={tenant} page={page}>
+  {visibleSections.map((section: Section) => {
+    const Component = resolveComponent(page.templateId, section.type);
+    return <Component content={section.content as any} tenant={tenant} />;
+  })}
+</BaseLayout>

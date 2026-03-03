@@ -1,0 +1,32 @@
+---
+import type { ServicesContent, Tenant } from "../../lib/types.ts";
+
+interface Props {
+  content: ServicesContent;
+  tenant: Tenant;
+}
+
+const { content, tenant } = Astro.props;
+const { heading, subtitle, items } = content;
+const { theme } = tenant;
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mb-14 text-center">
+      <h2 class="mb-4 text-4xl font-bold text-gray-900">{heading}</h2>
+      {subtitle && <p class="mx-auto max-w-2xl text-lg text-gray-600">{subtitle}</p>}
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => (
+        <div class="rounded-2xl bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
+          {item.icon && (
+            <div class="mb-4 text-4xl">{item.icon}</div>
+          )}
+          <h3 class="mb-3 text-xl font-semibold text-gray-900">{item.title}</h3>
+          <p class="leading-relaxed text-gray-600">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
