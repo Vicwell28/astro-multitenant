@@ -1,0 +1,72 @@
+---
+import "../styles/global.css";
+import type { TenantConfig } from "../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+
+const { tenant } = Astro.props;
+const { metadata, name, primaryColor, secondaryColor, customCss, logo } = tenant;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.url).toString();
+const ogImage = metadata.ogImage ?? "/og-default.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name,
+  url: canonicalURL,
+  logo: logo ?? "",
+  description: metadata.description,
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO básico -->
+    <title>{metadata.title}</title>
+    <meta name="description" content={metadata.description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={metadata.title} />
+    <meta property="og:description" content={metadata.description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={name} />
+    <meta property="og:locale" content="es_MX" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={metadata.title} />
+    <meta name="twitter:description" content={metadata.description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Favicon dinámico -->
+    {logo && <link rel="icon" href={logo} />}
+    {!logo && <link rel="icon" href="/favicon.svg" />}
+
+    <!-- Preconnect fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Custom CSS dinámico del tenant -->
+    {customCss && <style set:html={customCss} />}
+
+    <!-- CSS variables del tenant -->
+    <style set:html={`:root { --color-primary: ${primaryColor}; --color-secondary: ${secondaryColor}; }`} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

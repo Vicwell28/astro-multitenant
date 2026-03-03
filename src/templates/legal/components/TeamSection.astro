@@ -1,0 +1,33 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+const team = tenant.content.team ?? [];
+---
+
+<section id="equipo" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14">
+      <div class="w-12 h-0.5 bg-yellow-400 mx-auto mb-4" />
+      <h2 class="font-serif text-4xl font-bold text-gray-900">Nuestro Equipo</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {team.map((member) => (
+        <div class="text-center">
+          <div class="w-28 h-28 rounded-full mx-auto mb-5 overflow-hidden bg-gray-100 flex items-center justify-center">
+            {member.photo
+              ? <img src={member.photo} alt={member.name} class="w-full h-full object-cover" />
+              : <span class="text-4xl">👤</span>
+            }
+          </div>
+          <h3 class="font-serif font-bold text-gray-900 text-lg">{member.name}</h3>
+          <p class="text-sm font-medium text-yellow-600 mt-1">{member.role}</p>
+          {member.bio && <p class="text-gray-500 text-sm mt-3 max-w-xs mx-auto">{member.bio}</p>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

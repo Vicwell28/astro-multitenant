@@ -1,0 +1,13 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+const footer = tenant.content.footer ?? {};
+---
+
+<footer id="contacto" class="bg-gray-900 text-gray-300 py-10 text-center">
+  <p class="text-sm">{footer.text ?? `© 2026 ${tenant.name}`}</p>
+</footer>

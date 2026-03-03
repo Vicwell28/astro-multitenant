@@ -1,0 +1,26 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+const hero = tenant.content.hero ?? {};
+---
+
+<section class="min-h-[80vh] flex flex-col items-center justify-center text-center px-8">
+  <h1 class="text-7xl font-black text-gray-900 tracking-tight mb-6 leading-none">
+    {hero.title ?? tenant.name}
+  </h1>
+  {hero.subtitle && (
+    <p class="text-xl text-gray-400 max-w-md">{hero.subtitle}</p>
+  )}
+  {hero.cta && (
+    <a
+      href="#trabajo"
+      class="mt-10 inline-block text-sm font-medium underline underline-offset-4 text-gray-900 hover:text-gray-500 transition-colors"
+    >
+      {hero.cta} →
+    </a>
+  )}
+</section>

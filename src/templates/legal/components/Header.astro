@@ -1,0 +1,45 @@
+---
+import type { TenantConfig } from "../../../lib/types.ts";
+
+interface Props {
+  tenant: TenantConfig;
+}
+const { tenant } = Astro.props;
+---
+
+<header
+  class="sticky top-0 z-50 bg-white border-b-2 shadow-sm"
+  style={`border-color: ${tenant.primaryColor}`}
+>
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      {tenant.logo
+        ? <img src={tenant.logo} alt={tenant.name} class="h-10 w-auto" />
+        : (
+          <span class="font-serif text-xl font-bold" style={`color: ${tenant.primaryColor}`}>
+            {tenant.name}
+          </span>
+        )
+      }
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#areas" class="text-sm font-medium text-gray-600 hover:text-gray-900">Áreas</a>
+      <a href="#equipo" class="text-sm font-medium text-gray-600 hover:text-gray-900">Equipo</a>
+      <a href="#testimonios" class="text-sm font-medium text-gray-600 hover:text-gray-900">Testimonios</a>
+      <a
+        href="#contacto"
+        class="contact-btn px-5 py-2.5 rounded border-2 text-sm font-semibold transition-all"
+        style={`border-color: ${tenant.primaryColor}; color: ${tenant.primaryColor}`}
+      >
+        Contactar
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .contact-btn:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+</style>
